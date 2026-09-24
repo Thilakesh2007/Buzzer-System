@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Player Buzzer - buzzin.live</title>
+  <meta name="description" content="Virtual buzzer interface for trivia, game shows, and classroom quizzes.">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+</head>
+<body id="player-screen-page">
+
+  <!-- Header -->
+  <header class="app-header">
+    <a href="/" class="brand-logo">
+      <span>Game</span><span class="dot-live"> Buzzer</span>
+      <span class="brand-badge">Player</span>
+    </a>
+    <div class="header-actions">
+      <button class="btn-icon btn-mute-toggle" title="Toggle Sound" aria-label="Toggle Sound">🔊</button>
+      <button id="btn-leave-room" class="btn-icon" title="Leave Game" aria-label="Leave Game">✕</button>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="main-container">
+
+    <!-- Screen 1: Join Room Form -->
+    <div id="player-join-card" class="card hero-card">
+      <h1 class="hero-title">Join a Game</h1>
+      <p class="hero-subtitle">Enter the 6-character room code from your host and your name.</p>
+
+      <div id="join-alert-box" class="alert-box"></div>
+
+      <form id="player-join-form">
+        <div class="form-group">
+          <label for="player-room-code" class="form-label">Room Code</label>
+          <input 
+            type="text" 
+            id="player-room-code" 
+            class="form-input room-code-input" 
+            placeholder="CODE" 
+            maxlength="6"
+            required
+            autocomplete="off"
+            autocapitalize="characters"
+            spellcheck="false"
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="player-name" class="form-label">Your Name or Team</label>
+          <input 
+            type="text" 
+            id="player-name" 
+            class="form-input" 
+            placeholder="e.g. Alex or Team Blue" 
+            maxlength="25"
+            required
+            autocomplete="off"
+          >
+        </div>
+
+        <button type="submit" class="btn btn-green btn-lg" style="width: 100%; margin-top: 0.5rem;">
+          Join Room
+        </button>
+      </form>
+    </div>
+
+    <!-- Screen 2: The Buzzer Interface (Hidden initially until joined) -->
+    <div id="player-buzzer-card" style="display: none; flex-direction: column; width: 100%; flex: 1;">
+      
+      <!-- Player Status Bar -->
+      <div class="player-status-bar">
+        <div class="player-info-item">
+          <span class="player-info-label">Room Code</span>
+          <span id="display-room-code" class="player-info-value" style="letter-spacing: 2px; font-family: monospace;">------</span>
+        </div>
+
+        <div class="player-info-item" style="text-align: center;">
+          <span class="player-info-label">Player</span>
+          <span id="display-player-name" class="player-info-value">Player</span>
+        </div>
+
+        <div class="connection-pill">
+          <span class="connection-dot"></span>
+          <span>LIVE</span>
+        </div>
+      </div>
+
+      <!-- Massive Buzzer Area -->
+      <div class="buzzer-container">
+        <button id="big-buzzer-btn" class="big-buzzer-btn" type="button" aria-label="Buzzer Button">
+          <span id="buzzer-text" class="buzzer-text">BUZZ!</span>
+          <span id="buzzer-subtext" class="buzzer-subtext">TAP OR PRESS SPACE</span>
+        </button>
+
+        <div id="buzzer-status-banner" class="buzzer-status-banner">
+          <span class="status-message" style="color: var(--green-hover);">🟢 Ready! Tap to buzz in</span>
+        </div>
+
+        <div class="keyboard-hint">
+          Pro-tip: Press <kbd>Spacebar</kbd> or <kbd>Enter</kbd> to buzz in immediately.
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/app.js"></script>
+</body>
+</html>

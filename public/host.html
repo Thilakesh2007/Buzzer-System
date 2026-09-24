@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Host Dashboard - buzzin.live</title>
+  <meta name="description" content="Host controls and live buzzer feed for trivia and game shows.">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+</head>
+<body id="host-dashboard-page">
+
+  <!-- Header -->
+  <header class="app-header">
+    <a href="/" class="brand-logo">
+      <span>Game</span><span class="dot-live"> Buzzer</span>
+      <span class="brand-badge" style="background: var(--blue-light); color: var(--blue-hover); border-color: rgba(59, 130, 246, 0.2);">Host</span>
+    </a>
+    <div class="header-actions">
+      <button class="btn-icon btn-mute-toggle" title="Toggle Sound" aria-label="Toggle Sound">🔊</button>
+      <a href="/" class="btn-icon" title="Exit Room">✕</a>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="main-container">
+    <!-- Top Hero Card: Room Code & Host Toolbar -->
+    <div class="host-top-card">
+      <div class="host-code-display">
+        <span class="host-code-label">Room Code</span>
+        <div class="host-code-value-wrap">
+          <span id="host-room-code" class="host-code-value">------</span>
+          <div class="host-code-actions">
+            <button id="btn-copy-code" class="btn btn-outline btn-sm" title="Copy 6-letter Room Code">
+              📋 Copy Code
+            </button>
+            <button id="btn-copy-link" class="btn btn-outline btn-sm" title="Copy Direct Player Join Link">
+              🔗 Copy Link
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="host-controls-bar">
+        <button id="btn-clear-buzzers" class="btn btn-blue" title="Reset all buzzers for the next question">
+          🔄 Clear Buzzers
+        </button>
+        <button id="btn-lock-toggle" class="btn btn-red" title="Toggle buzzer lock state">
+          🔒 Lock Buzzers
+        </button>
+
+        <label class="toggle-switch-wrapper" title="Automatically lock buzzers as soon as the first player buzzes in">
+          <input type="checkbox" id="checkbox-auto-lock" checked>
+          <span class="toggle-switch-label">Auto-Lock on 1st Buzz</span>
+        </label>
+      </div>
+    </div>
+
+    <!-- 2-Column Dashboard Grid -->
+    <div class="host-dashboard-grid">
+      
+      <!-- Column 1: Live Buzzer Feed -->
+      <div class="panel-card">
+        <div class="panel-header">
+          <div class="panel-title">
+            <span>⚡</span>
+            <span>Buzzer Feed</span>
+          </div>
+          <span class="panel-badge">Chronological &bull; Millisecond Sync</span>
+        </div>
+
+        <div class="panel-body">
+          <div id="buzzer-feed-list" class="buzzer-feed-list"></div>
+
+          <!-- Empty State -->
+          <div id="empty-feed-placeholder" class="empty-feed">
+            <div class="empty-feed-icon">🔔</div>
+            <div class="empty-feed-title">Waiting for buzzers...</div>
+            <div class="empty-feed-desc">
+              When players hit their buzzer, they will appear here in chronological order with millisecond split times.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Column 2: Connected Players -->
+      <div class="panel-card">
+        <div class="panel-header">
+          <div class="panel-title">
+            <span>👥</span>
+            <span>Connected Players</span>
+          </div>
+          <span id="player-count-badge" class="panel-badge active-count">0</span>
+        </div>
+
+        <div class="panel-body">
+          <div id="player-list-items" class="player-list">
+            <div style="color: var(--text-muted); font-size: 0.9rem; text-align: center; padding: 1rem 0;">
+              Waiting for players to join...
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/app.js"></script>
+</body>
+</html>

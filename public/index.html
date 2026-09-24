@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>buzzin.live - Real-Time Game Show Buzzer</title>
+  <meta name="description" content="Simple, fast, and real-time virtual buzzer for game shows, trivia nights, and classrooms.">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+  <!-- App Header -->
+  <header class="app-header">
+    <a href="/" class="brand-logo">
+      <span>Game</span><span class="dot-live"> Buzzer</span>
+    </a>
+    <div class="header-actions">
+      <button class="btn-icon btn-mute-toggle" title="Toggle Sound" aria-label="Toggle Sound">🔊</button>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="main-container">
+    <div class="card hero-card">
+      <h1 class="hero-title">Virtual Buzzer</h1>
+      <p class="hero-subtitle">Fast, synchronized real-time buzzers for trivia, game shows, and classrooms.</p>
+
+      <!-- Quick Room Code Join Form -->
+      <form id="quick-join-form" class="form-group" style="margin-bottom: 1.5rem;">
+        <label for="quick-room-code" class="form-label">Have a 6-character room code?</label>
+        <div style="display: flex; gap: 0.5rem;">
+          <input 
+            type="text" 
+            id="quick-room-code" 
+            class="form-input room-code-input" 
+            placeholder="CODE" 
+            maxlength="6"
+            autocomplete="off"
+            autocapitalize="characters"
+            spellcheck="false"
+            style="font-size: 1.3rem; padding: 0.75rem;"
+          >
+          <button type="submit" class="btn btn-green" style="padding: 0.75rem 1.4rem;">
+            Join
+          </button>
+        </div>
+      </form>
+
+      <div style="display: flex; align-items: center; margin: 1.25rem 0; color: var(--text-muted); font-size: 0.85rem; font-weight: 700;">
+        <div style="flex: 1; height: 1px; background: var(--border-color);"></div>
+        <span style="padding: 0 0.75rem; text-transform: uppercase;">Or Choose Role</span>
+        <div style="flex: 1; height: 1px; background: var(--border-color);"></div>
+      </div>
+
+      <!-- Main Action Buttons -->
+      <div class="hero-btn-stack">
+        <a href="/player.html" class="btn btn-green btn-lg">
+          <span style="font-size: 1.4rem;">🔔</span> Join a Game
+        </a>
+        <a href="/host.html" class="btn btn-blue btn-lg">
+          <span style="font-size: 1.4rem;">👑</span> Create a Game (Host)
+        </a>
+      </div>
+
+      <!-- Feature Badges -->
+      <div style="display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; flex-wrap: wrap;">
+        <div style="display: flex; align-items: center; gap: 0.35rem; font-size: 0.8rem; font-weight: 700; color: var(--text-muted);">
+          <span>⚡</span> Millisecond Precision
+        </div>
+        <div style="display: flex; align-items: center; gap: 0.35rem; font-size: 0.8rem; font-weight: 700; color: var(--text-muted);">
+          <span>📱</span> Mobile & Desktop
+        </div>
+        <div style="display: flex; align-items: center; gap: 0.35rem; font-size: 0.8rem; font-weight: 700; color: var(--text-muted);">
+          <span>🔒</span> Host Controls
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/app.js"></script>
+</body>
+</html>
